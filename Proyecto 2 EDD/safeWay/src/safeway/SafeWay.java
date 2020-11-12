@@ -16,7 +16,7 @@ public class SafeWay {
       
       
       UsuarioNodoB nuevoUsu = new UsuarioNodoB(1,"cesar","chs","cesar@gmail.com","123",321,0);
-      arbolBNormal.insert(nuevoUsu, nuevoUsu.id);
+//      arbolBNormal.insert(nuevoUsu, nuevoUsu.id);
       arbolBNormal.inOrden();
       /*    FLUJO
       se crean las edds
