@@ -17,6 +17,7 @@ public class ArbolB<Template> {
     //apuntador padre
     private ArbolB father;
     private ArbolB[] children;
+    UsuarioNodoB nNodo;
 
     private boolean hasChildren(){
         for(int i=0;i<grade;i++)
@@ -33,16 +34,16 @@ public class ArbolB<Template> {
         father=null;
     }
 
-    public ArbolB<Template> insert(Template val){
+    public ArbolB<Template> insert(Template val, UsuarioNodoB nodo){
         //si es un nodo sin hijos se inserta aqui
 
         if(! hasChildren())
             
-            addSorted(val,null,null);
+            addSorted(val,nodo,null,null);
         else {
             ///se debe determinar en que apuntador hijo se debe insertar el nuevo valor
 
-            findPositionOfValue(val).insert(val);
+            findPositionOfValue(val).insert(val, nodo);
 
         }
         return this;
@@ -74,7 +75,7 @@ public class ArbolB<Template> {
     }
 
 //metodo recursivo
-    private void addSorted(Template val,ArbolB pleft,ArbolB pright) {
+    private void addSorted(Template val, UsuarioNodoB nodo,ArbolB pleft,ArbolB pright) {
         //se recorre de atras para adelante porque los numeros se van llenando del indece 0,1..load-1
         //se tiene una bandera para saber si se inserto el valor al terminar el ciclo
         boolean isInserted=false;
@@ -151,7 +152,7 @@ public class ArbolB<Template> {
              } else {
                  left.father=this.father;
                  right.father=this.father;
-                 father.addSorted(keys[med],left,right);
+                 father.addSorted(keys[med], nodo,left,right);
              }
 
          }
@@ -221,10 +222,11 @@ public class ArbolB<Template> {
             return ; //no se encontro el nodo del cual se quito un key
         //primero se verifica que el nodo anterior al modificado tenga mas del minimo
         if(i>0 && children[i-1].load > (grade-1)/2){
+            UsuarioNodoB nodo = (UsuarioNodoB) keys[i-1];
             Template val=this.keys[i-1];
             this.keys[i-1] =(Template) children[i-1].keys[load-1];
             children[i-1].load--;
-            childWithKeyDeleted.insert(val);
+            childWithKeyDeleted.insert(val,nodo);
 
         }
         else if(i<load && children[i+1].load > (grade-1)/2  ){

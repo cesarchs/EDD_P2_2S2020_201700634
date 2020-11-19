@@ -26,4 +26,8 @@ public class UsuarioNodoB {
         this.telefono = telefono;
         this.rolInt= rolint;
     }
+    
+    public String getDotName(){
+        return "Nodo "+this.id;
+    }
 }
